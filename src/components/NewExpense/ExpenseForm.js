@@ -15,8 +15,6 @@ export default function ExpenseForm(props) {
     })
 
     const titleChangeHandler = (e) => {
-        console.log('title-changed');
-        console.log(e.target.value);
         setEnteredTitle(e.target.value);
 
         // One State
@@ -75,6 +73,7 @@ export default function ExpenseForm(props) {
                 </div>
 
                 <div className="new-expense__actions">
+                    <button type="button" onClick={props.onCancel}>Cancel</button>
                     <button type="submit">Add Your Expense</button>
                 </div>
 

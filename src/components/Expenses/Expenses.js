@@ -3,6 +3,8 @@ import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter';
+import ExpenseList from './ExpenseList';
+import ExpensesChart from './ExpensesChart';
 
 export default function Expenses(props) {
 
@@ -12,17 +14,68 @@ export default function Expenses(props) {
 
     const filterChangeHandler = (selectedYear) => {
         setFilteredYear(selectedYear)
-        console.log(selectedYear)
     }
+
+    const filteredExpenses = expenses.filter(((expense) => {
+        return expense.date.getFullYear().toString() === filteredYear;
+    }))
+
+    //Conditional Rendering
+    // let expenseContent = <p className="white">No Expenses Found</p>;
+
+    // if (filteredExpenses.length > 0) {
+    //     expenseContent = filteredExpenses.map((expense) => {
+    //         return (
+    //             <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} key={expense.id}/>
+    //         )
+    //     })
+    // }
 
     return (
     // <div className="expenses">
     <Card className="expenses">
+        
         <ExpenseFilter onChangeFilter={filterChangeHandler} selected={filteredYear}/>
-        <ExpenseItem title={expenses[0].title} amount={expenses[0].amount} date={expenses[0].date}/>
-        <ExpenseItem title={expenses[1].title} amount={expenses[1].amount} date={expenses[1].date}/>
-        <ExpenseItem title={expenses[2].title} amount={expenses[2].amount} date={expenses[2].date}/>
-        <ExpenseItem title={expenses[3].title} amount={expenses[3].amount} date={expenses[3].date}/>
+
+        {/* Chart */}
+        <ExpensesChart expenses={filteredExpenses} />
+
+        <ExpenseList items={filteredExpenses} />
+
+        {/* {expenses.map((expense) => {
+            return (
+                <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} key={expense.id}/>
+            )
+        })} */}
+
+        {/* Filter */}
+        {/* {filteredExpenses.map((expense) => {
+            return (
+                <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} key={expense.id}/>
+            )
+        })} */}
+
+        {/* Conditional Rendering */}
+        {/* condition ? true: false */}
+
+        {/* {filteredExpenses.length === 0 ? <p className="white">No Expenses Found</p> : (
+            filteredExpenses.map((expense) => {
+                return (
+                    <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} key={expense.id}/>
+                )
+            })
+        )} */}
+
+        {/* {filteredExpenses.length === 0 && <p className="white">No Expenses Found</p>}
+
+        {filteredExpenses.length > 0 && filteredExpenses.map((expense) => {
+                return (
+                    <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} key={expense.id}/>
+                )
+            })} */}
+
+        {/* {expenseContent} */}
+
     </Card>
 
     
